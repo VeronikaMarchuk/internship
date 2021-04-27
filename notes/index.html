@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    function intervalConstruction(arr) {
+        let intervals = ['m2', 'M2', 'm3', 'M3', 'P4', 'P5', 'm6', 'M6', 'm7', 'M7', 'P8'];
+        let semitones = [1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12];
+        let degrees = [2, 2, 3, 3, 4, 5, 6, 6, 7, 7, 8];
+        let str1 = 'CDEFGAB';
+        let semitonesBetweenNotes = [2, 2, 1, 2, 2, 2, 1];
+
+        let semitone = semitones[intervals.indexOf(arr[0])];
+        let degree = degrees[intervals.indexOf(arr[0])];
+
+        let startPosition = str1.indexOf(arr[1][0]);
+        let endPosition = str1[(startPosition + degree) % str1.length - 1];
+
+        let semitone1 = 0;
+        let resultString;
+
+        if (arr[2] == 'asc' || arr.length == 2) {
+            for (let i = 0; i < degree - 1; i++) {
+                semitone1 += semitonesBetweenNotes[(startPosition + i) % str1.length];
+            }
+
+            if (arr[1][1] == 'b')
+                semitone1 += 1;
+
+            if (arr[1][1] == '#')
+                semitone1 -= 1;
+            if (arr[1][2] == 'b')
+                semitone1 += 1;
+
+            if (arr[1][2] == '#')
+                semitone1 -= 1;
+
+            while (semitone1 != semitone) {
+                if (semitone < semitone1) {
+                    endPosition += 'b';
+                    semitone1 -= 1;
+                }
+                if (semitone > semitone1) {
+                    endPosition += '#';
+                    semitone1 += 1;
+                }
+            }
+            resultString = endPosition;
+        }
+        if (arr[2] == 'dsc') {
+            let endPosition = str1.indexOf(arr[1][0]);
+            let startIndex = (endPosition > degree) ? (endPosition - degree) % str1.length + 1 : (str1.length - degree + endPosition) % str1.length + 1;
+            let startPosition = str1[startIndex];
+
+            for (let i = 0; i < degree - 1; i++) {
+                semitone1 += semitonesBetweenNotes[(str1.length - endPosition + i - 1) % str1.length];
+            }
+            if (arr[1][1] == 'b')
+                semitone1 -= 1;
+            if (arr[1][2] == 'b')
+                semitone1 -= 1;
+            if (arr[1][1] == '#')
+                semitone1 += 1;
+            if (arr[1][2] == '#')
+                semitone1 += 1;
+
+            while (semitone1 != semitone) {
+                if (semitone < semitone1) {
+                    startPosition += '#';
+                    semitone1 -= 1;
+                }
+                if (semitone > semitone1) {
+                    startPosition += 'b';
+                    semitone1 += 1;
+                }
+            }
+            resultString = startPosition;
+        }
+        if(arr.length > 3 || arr.length < 2)
+            resultString = 'Illegal number of elements in input array';
+
+        return resultString;
+    }
+
+    function intervalIdentification(arr) {
+        let intervals = ['m2', 'M2', 'm3', 'M3', 'P4', 'P5', 'm6', 'M6', 'm7', 'M7', 'P8'];
+        let semitones = [1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12];
+        let degrees = [2, 2, 3, 3, 4, 5, 6, 6, 7, 7, 8];
+        let str1 = 'CDEFGAB';
+        let semitonesBetweenNotes = [2, 2, 1, 2, 2, 2, 1];
+
+        let startPosition = str1.indexOf(arr[0][0]);
+        let endPosition = str1.indexOf(arr[1][0]);
+        let degree;
+
+        let semitone = 0;
+        let semitone1 = 0;
+        let resultString;
+
+
+        if (arr[2] == 'asc' || arr.length == 2) {
+            if (startPosition > endPosition)
+                degree = str1.length - startPosition + endPosition + 1;
+            else
+                degree = endPosition + 1 - startPosition;
+            for (let i = 0; i < degree - 1; i++) {
+                semitone1 += semitonesBetweenNotes[(startPosition + i) % str1.length];
+            }
+            if (arr[0][1] == 'b' || arr.length == 2) {
+                semitone = arr[0].length - 1;
+                semitone1 += 1 * semitone;
+            }
+            if (arr[0][1] == '#') {
+                semitone = arr[0].length - 1;
+                semitone1 -= 1 * semitone;
+            }
+            if (arr[1][1] == 'b') {
+                semitone = arr[1].length - 1;
+                semitone1 -= 1 * semitone;
+            }
+            if (arr[1][1] == '#') {
+                semitone = arr[1].length - 1;
+                semitone1 += 1 * semitone;
+            }
+        }
+
+        if (arr[2] == 'dsc') {
+            if (startPosition < endPosition) {
+                degree = (str1.length + startPosition - endPosition) % str1.length + 1;
+            } else {
+                degree = startPosition + 1 - endPosition;
+            }
+            for (let i = 0; i < degree - 1; i++) {
+                semitone1 += semitonesBetweenNotes[(endPosition + i) % str1.length];
+            }
+
+            if (arr[0][1] == 'b') {
+                semitone = arr[0].length - 1;
+                semitone1 -= 1 * semitone;
+            }
+            if (arr[0][1] == '#') {
+                semitone = arr[0].length - 1;
+                semitone1 += 1 * semitone;
+            }
+            if (arr[1][1] == 'b') {
+                semitone = arr[1].length - 1;
+                semitone1 += 1 * semitone;
+            }
+            if (arr[1][1] == '#') {
+                semitone = arr[1].length - 1;
+                semitone1 -= 1 * semitone;
+            }
+        }
+        let semitoneCount = semitones.indexOf(semitone1);
+
+        let interval = intervals[semitoneCount];
+        alert(interval)
+        if (interval[1] == degree)
+            resultString = interval;
+        else
+            resultString = 'Cannot identify the interval';
+
+        return resultString;
+    }
+
+</script>
+</body>
+</html>
