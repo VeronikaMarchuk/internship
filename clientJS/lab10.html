@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		div{
+			display: inline-block;
+			border: 1px solid #b5e9a7;
+			position: relative;
+			background: #fff;
+			margin: 0 20px 20px 0;
+			text-decoration: none;
+			color: #474747;
+			z-index: 0;
+			height: 220px;
+			width: 200px;
+		}
+		div img{
+			width: 200px;
+			height: auto;
+			margin: 0px;
+		}
+		div p{
+			margin: 1px 1px;
+			text-align: center;
+		}
+		#btns1{
+			background-color: royalblue;
+			width: 100px;
+			height: 60px;
+			text-align: center;
+			color: white;
+			padding: 0px 0px;
+			border-radius: 5px;
+		}
+		#basket{
+			background-color: royalblue;
+			width: 100px;
+			height: 40px;
+			text-align: center;
+			color: white;
+			padding: 0px 0px;
+			border-radius: 5px;
+			float: right;
+		}
+	</style>
+</head>
+<body>
+    <button id="btns1" onclick="Button.createButton()">Добавить кнопку</button>
+	<button id="btns1" onclick="Product.addProduct()">Добавить товар</button>
+	<button id="btns1" onclick="Product.removeProduct()">Удалить товар по коду</button>
+	<button id="btns1" onclick="colorGray()">Сделать серыми</button>
+	<button onclick="" id = "basket">Корзина</button>
+	<br>
+	<script type="text/javascript">
+		let id = 0;
+		let products = [];
+		let countBasket = 0;
+		class Product {
+			constructor(name, img, cost, code) {
+				this.name = name;
+				this.img = img;
+				this.cost = cost;
+				this.code = code;
+			}
+			static addProduct(){
+				let name = prompt('Введите наименование товара', '');
+				let img = prompt('Введите ссылку на картинку товара', '');
+				let cost = prompt('Введите цену товара', '');
+				id++;
+				products.push(new Product(name, img, cost, id));
+				products[products.length - 1].showProduct();
+			}
+			static removeProduct(){
+				let id = 'id' + prompt('Введите id товара');
+				let elem = document.getElementById(`${id}`);
+				elem.parentNode.removeChild(elem)
+				for(let i = 0; i < products.length; i++){
+					if(products[i].code == id)
+						products.splice(i, 1);
+				}
+			}
+			showProduct(){
+				document.body.innerHTML += `<div class="product" id="id${this.code}"><img id="image" src="${this.img}" ><p id="name"><b>${this.name}</b></p><p id="cost">&#36;${this.cost}</p><button id="basket" onclick="addBasket()">В корзину</button><button id="basket" onclick="change2(this)">Изменить</button></div>`;
+			}
+
+		}
+		function addBasket(){
+			countBasket++;
+			let elem = document.getElementById('basket');
+			elem.innerHTML = `Корзина(${countBasket})`;
+		}
+		class Button{
+			// constructor(size, background, text, id) {
+			// 	this.size = size;
+			// 	this.background = background;
+			// 	this.text = text;
+			// 	this.id = id;
+			// }
+			static createButton() {
+				let widthB = prompt('Введите ширину кнопки', '');
+				let heightB = prompt('Введите высоту кнопки', '');
+				let backgroundB = prompt('Введите цвет кнопки', '');
+				let textB = prompt('Введите содержимое кнопки', '');
+				document.body.innerHTML += `<button id="btns" style="background: ${backgroundB}" onclick="change(this)">${textB}</button>`;
+			}
+			static styleB(identifier){
+				let widthB = prompt('Введите ширину кнопки', '');
+				let heightB = prompt('Введите высоту кнопки', '');
+				let backgroundB = prompt('Введите цвет кнопки', '');
+				let textB = prompt('Введите содержимое кнопки', '');
+				let elem = document.getElementById(`btns`);
+				elem.innerText = textB;
+				identifier.style.height = heightB + 'px';
+				identifier.style.width = widthB + 'px';
+				identifier.style.background = backgroundB;
+			}
+			static removeButton(identifier){
+				identifier.remove();
+			}
+		}
+		function change2(identifier) {
+			let name = prompt('Введите наименование товара', '');
+			let img = prompt('Введите ссылку на картинку товара', '');
+			let cost = prompt('Введите цену товара', '');
+			let elem = document.getElementById(`image`);
+			elem.setAttribute('src',img);
+			let elem2 = document.getElementById(`name`);
+			elem2.innerHTML = '<b>' + name + '</b>';
+			let elem3 = document.getElementById(`cost`);
+			elem3.innerHTML = '&#36;' + cost;
+		}
+
+		function change(identifier) {
+			if (confirm('изменить кнопку?')){
+				Button.styleB(identifier);
+			}
+			if (confirm('хотите удалить кнопку?')){
+				Button.removeButton(identifier);
+			}
+		}
+		function colorGray(){
+			for(let i = 0; i < products.length; i++) {
+				if (i % 2 == 0) {
+					let elem = document.getElementById(`id${products[i].code}`);
+					elem.style.background = 'gray';
+				}
+			}
+		}
+
+		// products.push(new Product('Macbook Pro', 'https://mobistore.by/files/products/43/apple-macbook-pro-13-touch-bar-2019-256gb-core-i5-8279u-pr5678_3.400x400.jpg?a52ecb8c3a4f3c4954f4ca0f234509cb', 2500, code++));
+		// for(let i =0; i < products.length; i++){
+		// 	products[i].addProduct();
+		// }
+		// function addProductStr(){
+		// 	let name = prompt('Введите наименование товара', '');
+		// 	let img = prompt('Введите ссылку на картинку товара', '');
+		// 	let cost = prompt('Введите цену товара', '');
+		// 	products.push(new Product(name, img, cost, code++));
+		// }
+	</script>
+</body>
+</html>
