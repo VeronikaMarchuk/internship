@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            font-family: Verdana;
+            font-size: 18pt;
+        }
+        /*body{*/
+        /*    display: flex;*/
+        /*    align-items: center;*/
+        /*    justify-content: center;*/
+        /*    overflow: hidden;*/
+        /*}*/
+        .container{
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            visibility: hidden;
+            height: auto;
+            width: 50vw;
+            background: rgba(255,255,255, 0.5);
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+        }
+        .container2{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            background-image: url("background.jpg");
+            color: white;
+        }
+        .container2 input{
+            width: 200px;
+            height: 25px;
+        }
+        .profile{
+            display: flex;
+            font-family: Verdana;
+            font-size: 24pt;
+            color: #000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .profile img{
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+        .hobby{
+            display: flex;
+        }
+        .hobby img{
+            width: 250px;
+            height: 150px;
+        }
+        .error1{
+            display: block;
+            visibility: hidden;
+        }
+        .error2{
+            display: block;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="profile">
+        <img src="img2.jpg">
+        <div class="name"></div>
+    </div>
+    <div class="hobby">
+        <img src="badminton.jpg">
+        <img src="volleyball.jpg">
+        <img src="velo.jpg">
+    </div>
+    <div onclick="logout()">Выход</div>
+</div>
+<div class="container2">
+    <div>
+        <div>login:</div>
+        <input class="user" type="text">
+        <div class="error1"></div>
+    </div>
+    <div>
+        <div>Password:</div>
+        <input class="pass" type="password">
+        <div class="error2"></div>
+    </div>
+    <div onclick="auth()">Войти</div>
+</div>
+<script>
+    // document.cookie = 'user=veronika';
+    // document.cookie = 'expires=23.03.2021';
+    if(getCookie('user') != undefined){
+        document.querySelector('.container').style.display = 'flex';
+        document.querySelector('.container').style.visibility = 'visible';
+        document.querySelector('.container2').style.display = 'block';
+        document.querySelector('.container2').style.visibility = 'hidden';
+        content();
+    }
+    else {
+        CookiesDelete();
+        document.querySelector('.container2').style.display = 'flex';
+        document.querySelector('.container2').style.visibility = 'visible';
+        document.querySelector('.container').style.display = 'block';
+        document.querySelector('.container').style.visibility = 'hidden';
+
+    }
+    function auth(){
+        let user = document.querySelector('.user').value;
+        let pass = document.querySelector('.pass').value;
+        if(user.length == ''){
+            document.querySelector('.error1').innerHTML = 'Введите логин';
+            document.querySelector('.error1').style.display = 'flex';
+            document.querySelector('.error1').style.visibility = 'visible';
+        }
+        else {
+            document.querySelector('.error1').style.display = 'block';
+            document.querySelector('.error1').style.visibility = 'hidden';
+        }
+        if(pass.length == ''){
+            document.querySelector('.error2').innerHTML = 'Введите пароль';
+            document.querySelector('.error2').style.display = 'flex';
+            document.querySelector('.error2').style.visibility = 'visible';
+        }
+        else {
+            document.querySelector('.error2').style.display = 'block';
+            document.querySelector('.error2').style.visibility = 'hidden';
+        }
+        if(pass.length != '' && user.length != ''){
+            let date = new Date(Date.now() + 86400e9);
+            date = date.toUTCString();
+            document.cookie = `user=${user};`;
+            document.cookie = `password=${pass};`;
+            document.cookie = `expires=${date};`;
+            content();
+            document.location.reload();
+        }
+
+    }
+    function content(){
+        document.querySelector('.name').innerHTML = getCookie('user');
+
+        let date = new Date();
+        if(date.getMonth() == 0 || date.getMonth() == 1 || date.getMonth() == 11){
+            document.querySelector('.hobby').innerHTML = '<img src="1.jpg"><img src="5.jpg"><img src="3.jpg">';
+            document.querySelector('body').style.backgroundImage = 'url(winter.png)';
+            document.querySelector('body').style.backgroundRepeat = 'no-repeat';
+            document.querySelector('body').style.backgroundSize = '100%';
+        }
+        if(date.getMonth() == 2 || date.getMonth() == 3 || date.getMonth() == 4){
+            document.querySelector('.hobby').innerHTML = '<img src="2.jpg"><img src="3.jpg"><img src="volleyball.jpg">';
+            document.querySelector('body').style.backgroundImage = 'url(spring.jpg)';
+            document.querySelector('body').style.backgroundRepeat = 'no-repeat';
+            document.querySelector('body').style.backgroundSize = '100%';
+        }
+        if(date.getMonth() == 5 || date.getMonth() == 6 || date.getMonth() == 7){
+            document.querySelector('.hobby').innerHTML = '<img src="volleyball.jpg"><img src="badminton.jpg"><img src="velo.jpg"><img src="4.jpg">';
+            document.querySelector('body').style.backgroundImage = 'url(summer.jpg)';
+            document.querySelector('body').style.backgroundRepeat = 'no-repeat';
+            document.querySelector('body').style.backgroundSize = '100%';
+        }
+        if(date.getMonth() == 8 || date.getMonth() == 9 || date.getMonth() == 10) {
+            document.querySelector('.hobby').innerHTML = '<img src="1.jpg"><img src="3.jpg"><img src="velo.jpg">';
+            document.querySelector('body').style.backgroundImage = 'url(autmn.jpeg)';
+            document.querySelector('body').style.backgroundRepeat = 'no-repeat';
+            document.querySelector('body').style.backgroundSize = '100%';
+        }
+    }
+    function logout(){
+        document.querySelector('.container2').style.display = 'flex';
+        document.querySelector('.container2').style.visibility = 'visible';
+        document.querySelector('.container').style.display = 'block';
+        document.querySelector('.container').style.visibility = 'hidden';
+        CookiesDelete();
+        document.location.reload();
+    }
+
+
+    function getCookie(name) {
+        let matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+    function CookiesDelete() {
+        let cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i];
+            let eqPos = cookie.indexOf("=");
+            let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+            document.cookie = name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+    }
+    alert(document.cookie);
+
+</script>
+</body>
+</html>
