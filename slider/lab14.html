@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/ui-lightness/jquery-ui.css">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.2.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.11.2/jquery-ui.min.js"></script>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        .wrapper{
+            width: 1180px;
+            margin: 0 auto;
+        }
+        .slider-container{
+            overflow: hidden;
+        }
+        .slider-track{
+            display: flex;
+            transition: .2s;
+        }
+        .slider-item{
+            height: 365px;
+            margin: 5px;
+        }
+
+
+        .slider-buttons{
+            text-align: center;
+        }
+
+
+        .ui-slider {
+            background: black;
+            height: 3px;
+            width: 526px;
+        }
+        .ui-slider-handle {
+            background: url("slider.png") no-repeat !important;
+            border: 0px solid white !important;
+            border-radius: 0px !important;
+            cursor: pointer !important;
+            -webkit-appearance: none !important;
+            margin-top: -0.3125rem !important;
+            outline: none !important; }
+
+        span{
+            color: red;
+        }
+        .text{
+            text-align: center;
+        }
+        .text1{
+            font-size: 30pt;
+            padding-top: 100px;
+            padding-bottom: 53px;
+        }
+        .text2{
+            padding-bottom: 100px;
+        }
+
+        .info{
+            height: 365px;
+            width: 271px;
+            border: 1px solid #e7e7e7;
+        }
+        .about{
+
+            text-align: center;
+        }
+        img{
+            margin: 0;
+            padding: 0;
+        }
+        .sl{
+            display: flex;
+            justify-content: center;
+            margin-top: 110px;
+            margin-bottom: 110px;
+        }
+        .soc{
+            visibility: hidden;
+            width: 270px;
+            height: 240px;
+            background-color: #262626;
+            margin-top: -245px;
+            z-index: 1;
+            padding-left: 57px;
+        }
+        .soc img{
+            margin-top: 99px;
+            margin-left: 5px;
+        }
+
+    </style>
+</head>
+<body>
+<p></p>
+<div class="text">
+    <div class="text1"><b>our <span>teamwork</span></b></div>
+    <div class="text2">Lorem impum dolor sit smet, consectetur <span>adipiscing elit.</span> Integer sed magma vel velit dignissim luctus eu in urna. Dapibus egestas turpis.</div>
+</div>
+<div class="wrapper">
+
+    <div class="slider-container">
+        <div class="slider-track">
+            <div class="slider-item">
+                <div class="info">
+                    <img class="foto" src="amr.png"><br>
+                    <div class="soc">
+                        <a href="https://vk.com/nika_marchuk"><img src="Facebook.png"></a>
+                        <a href="https://vk.com/nika_marchuk"><img src="Twitter.png"></a>
+                        <a href="https://vk.com/nika_marchuk"><img src="Google.png"></a>
+                    </div>
+                    <div class="about">
+                        <p class="name" style="font-size: 20pt; margin-bottom: 0">AMR SROUR</p>
+                        <p style="font-size: 16pt; margin-top: 0; padding-top: 15px">Webdesigner</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-item">
+                <div class="info">
+                    <img class="foto" src="sarah.png"><br>
+                    <div class="soc">
+                        <a href="https://vk.com/nika_marchuk"><img src="Facebook.png"></a>
+                        <a href="https://vk.com/nika_marchuk"><img src="Twitter.png"></a>
+                        <a href="https://vk.com/nika_marchuk"><img src="Google.png"></a>
+                    </div>
+                    <div class="about">
+                        <p class="name" style="font-size: 20pt; margin-bottom: 0">SARAH DOE</p>
+                        <p style="font-size: 16pt; margin-top: 0; padding-top: 15px">Webdesigner</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-item">
+                <div class="info">
+                    <img class="foto" src="johan.png"><br>
+                    <div class="soc">
+                        <a href="https://vk.com/nika_marchuk"><img src="Facebook.png"></a>
+                        <a href="https://vk.com/nika_marchuk"><img src="Twitter.png"></a>
+                        <a href="https://vk.com/nika_marchuk"><img src="Google.png"></a>
+                    </div>
+                    <div class="about">
+                        <p class="name" style="font-size: 20pt; margin-bottom: 0">JOHAN DE</p>
+                        <p style="font-size: 16pt; margin-top: 0; padding-top: 15px">Webdesigner</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-item">
+                <div class="info">
+                    <img class="foto" src="amr.png"><br>
+                    <div class="soc">
+                        <a href="https://vk.com/nika_marchuk"><img src="Facebook.png"></a>
+                        <a href="https://vk.com/nika_marchuk"><img src="Twitter.png"></a>
+                        <a href="https://vk.com/nika_marchuk"><img src="Google.png"></a>
+                    </div>
+                    <div class="about">
+                        <p class="name" style="font-size: 20pt; margin-bottom: 0">AMR SROUR</p>
+                        <p style="font-size: 16pt; margin-top: 0; padding-top: 15px">Webdesigner</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-item">
+                <div class="info">
+                    <img class="foto" src="sarah.png"><br>
+                    <div class="soc">
+                        <a href="https://vk.com/nika_marchuk"><img src="Facebook.png"></a>
+                        <a href="https://vk.com/nika_marchuk"><img src="Twitter.png"></a>
+                        <a href="https://vk.com/nika_marchuk"><img src="Google.png"></a>
+                    </div>
+                    <div class="about">
+                        <p class="name" style="font-size: 20pt; margin-bottom: 0">SARAH DOE</p>
+                        <p style="font-size: 16pt; margin-top: 0; padding-top: 15px">Webdesigner</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-item">
+                <div class="info">
+                    <img class="foto" src="johan.png"><br>
+                    <div class="soc">
+                        <a href="https://vk.com/nika_marchuk"><img src="Facebook.png"></a>
+                        <a href="https://vk.com/nika_marchuk"><img src="Twitter.png"></a>
+                        <a href="https://vk.com/nika_marchuk"><img src="Google.png"></a>
+                    </div>
+                    <div class="about">
+                        <p class="name" style="font-size: 20pt; margin-bottom: 0">JOHAN DE</p>
+                        <p style="font-size: 16pt; margin-top: 0; padding-top: 15px">Webdesigner</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+</div>
+<div class="sl">
+    <div id="slider"></div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function (){
+        let position = 0;
+        const slidesToShow = 4;
+        const slidesToScroll = 0.2;
+        const container = $('.slider-container');
+        const track = $('.slider-track');
+        const item = $('.slider-item');
+        const itemsCount = item.length;
+        const itemWidth = container.width() / slidesToShow;
+        const movePosition = slidesToScroll * itemWidth;
+
+        item.each(function (index, item) {
+            $(item).css({
+                minWidth: itemWidth,
+            });
+        });
+
+        $(document).keydown(function(e) {
+            if (e.which == 37) {
+                const itemsLeft = Math.abs(position) / itemWidth;
+                position += movePosition >= slidesToScroll ? movePosition : itemsLeft * itemWidth;
+
+                setPosition();
+                checkBtns();
+                $('#slider').slider({
+                    slide: function (event, ui){
+                        ui.value += position*0.2;
+                        track.css({
+                            transform: `translateX(${-ui.value}px)`,
+                        })
+                    }});
+            }
+            if (e.which == 39) {
+                const itemsLeft = itemsCount - (Math.abs(position) + slidesToShow * itemWidth) / itemWidth;
+                position -= movePosition >= slidesToScroll ? movePosition : itemsLeft * itemWidth;
+
+                setPosition();
+                checkBtns();
+                $('#slider').slider({
+                    slide: function (event, ui){
+                        ui.value -= position*0.2;
+                        track.css({
+                            transform: `translateX(${-ui.value}px)`,
+                        })
+                    }});
+            }
+        });
+
+        const setPosition = () =>{
+            track.css({
+                transform: `translateX(${position}px)`,
+            });
+
+
+        }
+
+        const checkBtns = () =>{
+            $('html').bind('keydown',function(e){
+                if(position === 0){
+                    if(e.which == 37){
+                        return false;
+                    }
+                }
+            });
+
+            $('html').bind('keydown',function(e){
+                const itemsLeft = itemsCount - (Math.abs(position) + slidesToShow * itemWidth) / itemWidth;
+                if( movePosition >= slidesToScroll ? movePosition : itemsLeft * itemWidth){
+                    if(e.which == 39){
+                        return false;
+                    }
+                }
+            });
+        }
+
+        checkBtns();
+
+
+        $(function(){
+
+            $('#slider').slider({
+                min: 0,
+                max: (itemsCount - slidesToShow) * itemWidth,
+                slide: function (event, ui){
+                    const pos = ui.value;
+                    track.css({
+                        transform: `translateX(-${pos}px)`,
+                    })
+
+                },
+                animate: "easy-out",
+                range: false,
+                step: 0.2
+            });
+        });
+
+        item.hover(function(){
+            $(this).children('.info').children('.about').children('.name').css('color', 'red');
+            $(this).children('.info').children('.foto').css('visibility', 'hidden');
+            $(this).children('.info').children('.soc').css('visibility', 'visible');
+            $(this).children('.info').css('border-color', 'black')
+        },function(){
+            $(this).children('.info').children('.about').children('.name').css('color', 'black');
+            $(this).children('.info').children('.foto').css('visibility', 'visible');
+            $(this).children('.info').children('.soc').css('visibility', 'hidden');
+            $(this).children('.info').css('border-color', '#e7e7e7')
+        });
+
+
+
+    });
+
+
+
+
+
+</script>
+</body>
+</html>
