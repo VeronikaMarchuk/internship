@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+
+		let shop = {
+			boots:[
+				{ productID: 1, productSize: 37, color: 'red', cost: 18},
+				{ productID: 2, productSize: 45, color: 'white', cost: 35},
+			],
+			sneakers:[
+				{ productID: 3, productSize: 33, color: 'blue', cost: 80},
+				{ productID: 4, productSize: 41, color: 'black', cost: 90},
+			],
+			sandals:[
+				{ productID: 5, productSize: 39, color: 'orange', cost: 80},
+				{ productID: 6, productSize: 41, color: 'yellow', cost: 65,
+					get sale() {
+						return this._sale;
+					},
+
+					set sale(value) {
+						this._sale  = value;
+					},
+					get costE() {
+						return (this.cost - this._sale * this.cost);
+					},
+					set costE(value) {
+						this._costE = value;
+					}
+				},
+			],
+			socks: { productID: 7, productSize: 35, color: 'green', cost: 3},
+			tshirt: { productID: 8, productSize: 42, color: 'white-red-white', cost: 15},
+
+			// [Symbol.iterator]() {
+			// 	return Object.entries(this).map(([key, value]) => ({key, value}))[Symbol.iterator]();
+			// }
+
+		};
+
+		function Boot(id, size, color, cost){
+			this.id = id;
+			this.size = size;
+			this.color = color;
+			this.cost = cost;
+		}
+
+		let boot1 = new Boot(10, 36, 'red', 35);
+		alert(boot1.id);
+		alert(boot1.size);
+		alert(boot1.color);
+		alert(boot1.cost);
+
+		for (let key in shop) {
+			document.write(key + ':<br>');
+			document.write(`productID\tproductSize\t color\tcost<br>`);
+			if (typeof (shop[key]) == "object") {
+				for (let key1 in shop[key]) {
+					if (typeof (shop[key][key1]) == "object") {
+						// let iterator1 = shop[`${key}`][`${key1}`][Symbol.iterator]();
+
+						document.write(shop[`${key}`][`${key1}`]['productID'] + '\t');
+						document.write(shop[`${key}`][`${key1}`]['productSize'] + '\t');
+						document.write(shop[`${key}`][`${key1}`]['color'] + '\t');
+						document.write(shop[`${key}`][`${key1}`]['cost'] + '<br>');
+					}
+					else{
+						document.write(shop[key][key1] + '\t');
+					}
+				}
+			}
+			else{
+				document.write(shop[key]);
+				document.write('<br>----<br>');
+			}
+			document.write('<br>-----------<br>');
+		}
+		//3
+		let startCost = prompt('Минимальная цена','');
+		let endCost = prompt('Максимальная цена','');
+		let searchSize = prompt('Размер', '');
+		let searchcolor = prompt('Цвет','');
+
+		// for (let key in shop) {
+		// 	let outputCost = shop[`${key}`].filter(shop => shop.cost >= startCost && shop.cost <= endCost);
+		// 	for(let i=0;i<outputCost.length;i++){
+		// 		document.write("Фильтр по цене: ", outputCost[i].productID, "</h2>", "<br/>")
+		// 	};
+		// 	// outputSize =  shop.boots.filter(shop => shop.productSize == searchSize);
+		// 	// outputColor =  shop.boots.filter(shop => shop.color == searchcolor);
+		// }
+		let outputCost = 'Фильтр по цене:<br>';
+		let outputSize = 'Фильтр по размеру:<br>';
+		let outputColor = 'Фильтр по цвету:<br>';
+		for (let key in shop) {
+			if (typeof (shop[key]) == "object") {
+				for (let key1 in shop[key]) {
+					if (typeof (shop[key][key1]) == "object") {
+						if(shop[`${key}`][`${key1}`]['cost']  >= startCost && shop[`${key}`][`${key1}`]['cost'] <= endCost)
+							outputCost += shop[`${key}`][`${key1}`]['productID'] + '<br>';
+						if(shop[`${key}`][`${key1}`]['productSize'] == searchSize)
+							outputSize += shop[`${key}`][`${key1}`]['productID'] + '<br>';
+						if(shop[`${key}`][`${key1}`]['color'] == searchcolor)
+							outputColor += shop[`${key}`][`${key1}`]['productID'] + '<br>';
+
+					}
+					else{
+						if(key1 == 'cost' && shop[key]['cost']  >= startCost && shop[key]['cost'] <= endCost)
+							outputCost += shop[key]['productID'] + '<br>';
+
+						if(key1 == 'productSize' && shop[`${key}`]['productSize'] == searchSize)
+							outputSize += shop[`${key}`]['productID'] + '<br>';
+						if(key1 == 'color' && shop[`${key}`]['color'] == searchcolor)
+							outputColor += shop[`${key}`]['productID'] + '<br>';
+					}
+				}
+			}
+		}
+		document.write(outputCost);
+		document.write(outputColor);
+		document.write(outputSize);
+		//
+
+		// console.log('------');
+		// Object.entries(shop.boots.pop()).forEach(([key, value]) => document.write(`${key}: ${value}<br>`));
+		// Object.entries(shop.boots.pop()).forEach(([key, value]) => document.write(`${key}: ${value}<br>`));
+
+		///4
+		Object.defineProperties(shop.tshirt, {
+			productID: {writable: false, configurable: false },
+			productSize: {writable: false },
+			color: {writable: false}
+		});
+
+		shop.tshirt.color = 'blue';
+		document.write('<br> ' + shop.tshirt.color + '<br>');
+
+		//5
+		// Object.defineProperty(shop.sandals, 'sale', {
+		// 	get sale() {
+		// 		return this._sale;
+		// 	},
+		//
+		// 	set sale(value) {
+		// 		this._sale  = value;
+		// 	}
+		// });
+		//
+		// Object.defineProperty(shop.sandals, 'costE', {
+		// 	get costE() {
+		// 		return (this._cost - this._sale * this._cost);
+		// 	},
+		// 	set costE(value) {
+		// 		this._costE = value;
+		// 	}
+		// });
+		shop.sandals[1].sale = 0.5;
+		document.write('<br>' + shop.sandals[1].cost + '<br>' + shop.sandals[1].costE);
+
+
+	</script>
+</body>
+</html>
